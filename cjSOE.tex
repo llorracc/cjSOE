@@ -20,7 +20,7 @@
             pdfcreator = {ps2pdf, pdfwrite}
             }
 
-\begin{document}
+\begin{document}\bibliographystyle{econtex}
 
 \opt{JournalFormatting}{\doublespacing}
 
@@ -74,7 +74,7 @@ A Tractable Model of Precautionary Reserves, Net Foreign Assets, or Sovereign We
 \texttt{~Slides:~}\> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE-Slides.pdf} \\
 \texttt{~~~~Web:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE/}    \\
 \texttt{~~~Repo:~} \> \> \url{https://github.com/llorracc/cjSOE} \\
-\texttt{~~~Code:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/code/Tractable.zip} \\
+%\texttt{~~~Code:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/code/Tractable.zip} \\
 \texttt{~~~~~~~~~} \> \> {\it (Contains code solving this paper's model (and related models))}
 \end{tabbing}
 \end{center}
@@ -1586,21 +1586,10 @@ Given the initial function for $m=0$, $_{0}\cFunc^{e}(\bRat)$, the algorithm can
   \item If $\max|_{m+1}\cRatE[i]-_{m}\cRatE[i]|<\epsilon$, stop; else increment $m$ and go to step 1
   \end{enumerate}
 
-\subsection{$\urate$ as a function of $\BTargTarg$}\label{subsec:urateFromBTargTarg}
-For use below, note that we can invert \eqref{eq} to express the parameters as an implicit function of target of target wealth:
-\begin{eqnarray}
-  \left(\frac{1-\kapShare}{\BTargTarg}\right) & = & \left[\frac{\PGro}{\Rfree}-\frac{1}{2-\LGro}+\MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]
-  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\} & = & \left[\left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]
-  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA} & = & \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)
-  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1& = & \frac{\PatPGro^{-\CRRA}-1}{\urate}
-  \\  \left[\left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1 \right]\urate & = & \PatPGro^{-\CRRA}-1
-  \\  \urate & = & \left[\left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1 \right]^{-1}\left(\PatPGro^{-\CRRA}-1\right)
-\end{eqnarray}
-
   
 \newpage
 
-\input econtexBibMake.tex
+\bibliography{\texname,\texname-Add,economics}
 
 \end{document}
 
