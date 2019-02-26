@@ -1,6 +1,8 @@
 \input{./econtexRoot}\input{\econtexRoot/econtexPaths.tex}\documentclass[titlepage]{\econtex}\newcommand{\texname}{cjSOE}
 
 \usepackage{\econtexSetup}\usepackage{\econtexShortcuts}\usepackage{\econtexShortcuts}
+\usepackage{\econtexRoot/cjSOE}
+\usepackage{subfiles}
 
 \usepackage{layouts,rotating,psfrag,amssymb}
 
@@ -36,9 +38,9 @@ A Tractable Model of Precautionary Reserves, Net Foreign Assets, or Sovereign We
 
 \newcommand{\forceSpace}{\ifdvi {\tiny .} \fi} % For html version, kludge to force a space to be inserted
 \author{
-{\bf Christopher D. Carroll\tiny{~}}\num \\ \forceSpace 
+{Christopher D. Carroll\tiny{~}}\num \\ \forceSpace 
 \and 
-{\bf Olivier Jeanne\tiny{~}}\num \\ \forceSpace
+{Olivier Jeanne\tiny{~}}\num \\ \forceSpace
 }
 
 
@@ -47,7 +49,7 @@ A Tractable Model of Precautionary Reserves, Net Foreign Assets, or Sovereign We
 \jelclass{C61}
 
 %\maketitle
-\maketitleWithForcedDate{October 2015} %\boldred{Preliminary Draft}}
+\maketitleWithForcedDate{February 2019} %\boldred{Preliminary Draft}}
 
 \begin{abstract}
   \opt{JournalFormatting}{\doublespacing} We model the motives for residents of a country to hold foreign
@@ -71,7 +73,7 @@ A Tractable Model of Precautionary Reserves, Net Foreign Assets, or Sovereign We
 \texttt{~~~~PDF:~}\> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE.pdf} \\
 \texttt{~Slides:~}\> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE-Slides.pdf} \\
 \texttt{~~~~Web:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE/}    \\
-\texttt{Archive:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/papers/cjSOE.zip} \\
+\texttt{~~~Repo:~} \> \> \url{https://github.com/llorracc/cjSOE} \\
 \texttt{~~~Code:~} \> \> \url{http://econ.jhu.edu/people/ccarroll/code/Tractable.zip} \\
 \texttt{~~~~~~~~~} \> \> {\it (Contains code solving this paper's model (and related models))}
 \end{tabbing}
@@ -95,7 +97,6 @@ Johns Hopkins University, Baltimore, MD 21218, \url{http://econ.jhu.edu/people/j
 
 \titlepagefinish
 \setcounter{page}{1}
-
 
 \section{Introduction} 
 
@@ -339,13 +340,13 @@ satisfy the dynamic equations,
 \\  \PopU_t - \PopU_{t-1} & = &\urate \PopE_{t-1} - \PDies \PopU_{t-1}.
 \end{eqnarray*}
 The first equation says that the net increase in the employed population is equal to the size of the newborn generation minus the flow of previously employed workers going to unemployment. The second says that the net increase in the unemployed population is equal to the number of newly unemployed workers minus the previously unemployed workers who exit life. It follows that the employed and unemployed populations are respectively given by
-\begin{verbatimwrite}{./equations/Pop.tex}
+\begin{verbatimwrite}{./Equations/Pop.tex}
 \begin{eqnarray*}
 \PopE_t & = & \frac{\EmpGro^{t+1}}{\EmpGro-\erate} \label{eq:PopEt}
 \\ \PopU_t & = & \frac{\urate \EmpGro^{t+1}}{(\EmpGro-\PLives)(\EmpGro-\erate)}. \label{eq:PopUt}
 \end{eqnarray*} % Derivation: PopUt
 \end{verbatimwrite}
-\input ./equations/Pop
+\input ./Equations/Pop
 
 Total labor supply is the number of workers times the average labor supply per worker,
 \begin{equation}
@@ -388,13 +389,13 @@ current labor income and current and next-period's wealth $\bLev$,\footnote{A
   literature frequently misapply the stock word savings for the flow
   word saving or vice versa, so we prefer to use the word `wealth'
   which unambiguously denotes a stock.}
-\begin{verbatimwrite}{./equations/ibc.tex}
+\begin{verbatimwrite}{./Equations/ibc.tex}
 \begin{equation}
 \frac{\bLev_{t+1}}{\Rfree}+ \cLev_{t}=\bLev_{t}+\overbrace{\empState_{t} \labor_{t} \Wage_t}^{\text{labor income}},
 \label{eq:ibc}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/ibc
+\input ./Equations/ibc
 where $\empState$ is a dummy variable indicating the consumer's
 employment state.
 Everyone in this economy is either employed (state `e'),
@@ -405,13 +406,13 @@ The labor
 productivity $\labor$ of each individual worker who remains employed
 is assumed to grow by a factor $\XperGro$ every period because of increasing
 eXperience,
-\begin{verbatimwrite}{./equations/IndLabSup}
+\begin{verbatimwrite}{./Equations/IndLabSup}
 \begin{equation}
 \labor_{t} =    \XperGro^t \labor_{0}
 \label{eq:IndLabSup},
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/IndLabSup
+\input ./Equations/IndLabSup
 where $\labor_0$ is the labor supply of a newborn
 individual. $\XperGro$ can be interpreted as the factor that governs
 the rate at which an individual's work skills improve, perhaps as a
@@ -420,12 +421,12 @@ which productivity grows in the economy as a whole, perhaps due to
 societal knowledge accumulation and technological advance
 (\cite{mankiw:growth}). This means that for a consumer who remains
 employed, labor income will grow by factor
-\begin{verbatimwrite}{./equations/XperGro}
+\begin{verbatimwrite}{./Equations/XperGro}
 \begin{eqnarray*}
 \PGro & \equiv & \WGro \XperGro.
 \end{eqnarray*}
 \end{verbatimwrite}
-\input ./equations/XperGro
+\input ./Equations/XperGro
 
 Following~\cite{toche:urisk}, unemployment entails a complete and permanent destruction of the individual's human wealth: Once a person becomes unemployed, that person can never be employed
 again. Thus, unemployment could also be interpreted as retirement (we calibrate the model so that the average length of the working life is forty years). Employed consumers face a constant risk $\urate$ of becoming unemployed regardless of their age.
@@ -473,23 +474,23 @@ consumption Euler equation as
   \label{eq:Explicit},
 \end{equation}
 while the budget constraint of an employed worker can be written, in normalized form, as
-\begin{verbatimwrite}{./equations/ibcnorm}
+\begin{verbatimwrite}{./Equations/ibcnorm}
 \begin{equation}
 \bRatE_{t+1} = (\Rfree/\PGro)\left(\bRatE_{t} -\cRatE_{t}+1\right).
 \label{eq:ibcnorm}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/ibcnorm.tex
+\input ./Equations/ibcnorm.tex
 
 Using this equation and $\cRatU_{t+1} = \MPCU \bRatE_{t+1}$ to substitute out $\cRatU_{t+1}$ from (\ref{eq:Explicit}) (since a worker who becomes unemployed in period $t+1$ starts with wealth $\bRat^e_{t+1}$), we have
-\begin{verbatimwrite}{./equations/cetp1}
+\begin{verbatimwrite}{./Equations/cetp1}
 \begin{equation}
 \cRatE_{t+1}=\PatPGro \erate^{1/\CRRA} \cRatE_t
 \left[1-\urate\left(\frac{\PatPGro}{\MPCU} \frac{\cRatE_t}{\Rfree/\PGro(\bRatE_{t} -\cRatE_{t}+1)}\right)^{\CRRA}\right]^{-1/\CRRA}.
 \label{eq:cetp1}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/cetp1.tex
+\input ./Equations/cetp1.tex
 
 Equations (\ref{eq:ibcnorm}) and (\ref{eq:cetp1}) characterize the dynamics for the pair of variables $(\bRatE_{t}, \cRatE_t)$. It is possible to show (see the appendix) that those dynamics are saddle-point stable, and that the ratio of wealth to income, $\bRat^e_t$, converges toward a positive limit, the target wealth-to-income ratio, denoted by $\bTargE$.
 Figure~\ref{fig:phaseDiag} presents the phase diagram.
@@ -509,13 +510,13 @@ and setting $\bRatE_{t+1}=\bRatE_t=\bTarg$ and $\cRatE_t=\cTarg$ in equation (\r
 \left(\PGro/\Rfree-1 \right) \bTarg = 1 -\cTarg. \label{eq:sss}
 \end{equation}
 Eliminating $\cTarg$ between (\ref{eq:ssc}) and (\ref{eq:sss}) then gives an explicit formula for the target wealth-to-income ratio,
-\begin{verbatimwrite}{./equations/bTargE}
+\begin{verbatimwrite}{./Equations/bTargE}
 \begin{equation}
  \bTarg= \left[\frac{\PGro}{\Rfree}-1+\MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]^{-1}.
 \label{eq:bTargE}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/bTargE.tex
+\input ./Equations/bTargE.tex
 Here is the intuition behind the target wealth ratio:  On the one hand,
 consumers are growth-impatient, which prevents their wealth-to-income ratio
 from heading off to infinity.  On the other hand, consumers have
@@ -574,12 +575,12 @@ expression for the ratio of net foreign assets to GDP.
 First, we focus on the wealth of the employed households. Calculations
 in the appendix show that the ratio of employed workers' wealth to
 output is given by
-\begin{verbatimwrite}{./equations/BRatEIndAgg}
+\begin{verbatimwrite}{./Equations/BRatEIndAgg}
 \begin{eqnarray}
 \BRatE_{t} = \frac{\BLevE_t}{\GDPLev_t} & = & (1-\kapShare) \left(1-\underbrace{\frac{\erate\XperGro}{\EmpGro}}_{\equiv \LGro}\right) \sum_{n=0}^{+\infty}\LGro^{n} \bRatE_{t,t-n}, \label{eq:LGro} \label{eq:BRatEIndAgg}
 \end{eqnarray}
 \end{verbatimwrite}
-\input ./equations/BRatEIndAgg.tex
+\input ./Equations/BRatEIndAgg.tex
 where $\bRatE_{t,t-n}$ is the wealth-to-income ratio at $t$ of the workers born at $t-n$, and $\LGro$ is the factor by which the share of a generation in total labor supply shrinks every period. Equation \eqref{eq:BRatEIndAgg}, thus, says that the ratio of workers' wealth to output is the average of the individual wealth-to-labor-income ratios over the past generations, weighted by the share of each generation in total labor supply and by the share of labor income in total output $(1-\kapShare)$.
 
 Second, consider the wealth of the unemployed households (managed by the Blanchardian life insurance company). The aggregate wealth of unemployed households satisfies the dynamic equation,
@@ -587,15 +588,16 @@ Second, consider the wealth of the unemployed households (managed by the Blancha
 \BLevU_{t+1}= \Rfree (\BLevU_{t} -\CLevU_t)+ \urate \BLevE_{t+1},
 \end{equation*}
 where the first term on the right-hand side reflects the accumulation of wealth by the previously-unemployed households, and the second term is the wealth of newly-unemployed households. The unemployed households consume a constant fraction of their wealth, $\CLevU_t= \MPCU \BLevU_{t}$, so that the equation above can be rewritten,
-\begin{verbatimwrite}{./equations/BLevUtp1}
+\begin{verbatimwrite}{./Equations/BLevUtp1}
 \begin{equation}
 \BLevU_{t+1}= \Rfree (1-\MPCU) \BLevU_{t}+ \urate \BLevE_{t+1}.
 \label{eq:BLevUtp1}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/BLevUtp1.tex
+\input ./Equations/BLevUtp1.tex
 This equation fully characterizes the dynamics of the unemployed households' wealth ratio for a given path for the employed workers' wealth ratio.
 
+\hypertarget{BuOyLev}{}
 
 Now we consider a steady state in which the wealth of the employed is a constant fraction of GDP, $\BRatE = \BLevE /\GDPLev$. Then equation (\ref{eq:BLevUtp1}) and $\GDPLev_{t+1}/\GDPLev_t=\EmpGro \WGro$  imply that the ratio of wealth to GDP is also constant for unemployed households,\footnote{This expression assumes $\EmpGro \WGro >\PLives(\Discount \Rfree )^{1/\CRRA}$. Otherwise $\BLevU_{t} / \GDPLev_t$ grows without bound.}
 \begin{equation}
@@ -606,13 +608,13 @@ Now we consider a steady state in which the wealth of the employed is a constant
 
 
 The ratio of net foreign assets to GDP is obtained by subtracting domestic capital from domestic wealth. Using (\ref{eq:KOyLev}), (\ref{eq:NFALev}), (\ref{eq:BuOyLev}), $\GDPLev_{t+1}/\GDPLev_t=\EmpGro \WGro$, and $\BLev_t=\BLevE_t+\BLevU_{t}$, the ratio of net foreign assets to GDP is given by
-\begin{verbatimwrite}{./equations/NFARat}
+\begin{verbatimwrite}{./Equations/NFARat}
 \begin{equation}
 \frac{\NFALev}{\GDPLev}= \frac{\EmpGro \WGro}{\Rfree} \left( 1 + \frac{\urate \EmpGro \WGro}{\EmpGro \WGro -\PLives(\Discount \Rfree )^{1/\CRRA}} \right) \frac{\BLevE}{\GDPLev} -\EmpGro \WGro\left( \frac{\kapShare}{\Rfree-\DeprFac}\right).
 \label{eq:NFARat}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/NFARat
+\input ./Equations/NFARat
 This expression gives the country's ratio of net foreign assets to GDP in terms of the exogenous parameters and one endogenous variable, the ratio of employed workers' wealth to GDP, $\BLevE/\GDPLev$. We now present two ways of pinning down the value of this endogenous variable.
 
 
@@ -630,13 +632,13 @@ individual starts his life with zero wealth, $\bRatE(0)=0$. In other
 words, $\bRatE(n)_{n=0,1,2,..}$ is the optimal time path of the
 individual's wealth. Then we can replace $\bRatE_{t,t-n}$ by
 $\bRatE(n)$ in equation (\ref{eq:BRatEIndAgg}),
-\begin{verbatimwrite}{./equations/BRatENostake}
+\begin{verbatimwrite}{./Equations/BRatENostake}
 \begin{eqnarray}
 \BRatE = \frac{\BLevE}{\GDPLev} & = & (1-\kapShare) (1-\LGro)\sum_{n=0}^{+\infty}\LGro^{n} \bRatE(n).
 \label{eq:BRatENostake}
 \end{eqnarray}
 \end{verbatimwrite}
-\input ./equations/BRatENostake
+\input ./Equations/BRatENostake
 The ratio of workers' wealth to GDP is constant, and can be computed numerically based on the path $\bRatE(n)_{n=0,1,...}$. Note that this ratio is lower than $(1-\kapShare) \bTargE$, since it is a weighted average of $(1-\kapShare) \bRatE(n)$, which converge toward $(1-\kapShare) \bTargE$ from below.
 
 
@@ -667,22 +669,23 @@ The details of the model with stakes are given in the appendix. The transfer ens
 \end{equation}
 where $\BRatE_t$ follows the same saddle-point dynamics as for a single agent (adjusted for the transfer).
 
-One can show (see the appendix) that in the long run, $\bRatE_t$ converges to
-\begin{verbatimwrite}{./equations/bTargEStakes}
+\hypertarget{bTargEStakes}{}
+In the long run (see the appendix), $\bRatE_t$ converges to
+\begin{verbatimwrite}{./Equations/bTargEStakes}
 \begin{equation}
  \bTargTarg = \left[\frac{\PGro}{\Rfree}-\frac{1}{2-\LGro}+\MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]^{-1}
 \label{eq:bTargEStakes}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/bTargEStakes.tex
-so that (\ref{eq:bTargEStakes}) implies a closed-form expression for the ratio of workers' wealth to GDP,
-\begin{verbatimwrite}{./equations/BRatEStakes}
+\input ./Equations/bTargEStakes.tex
+so that (\ref{eq:bTargEStakes}) implies a closed-form expression for the ratio of workers' wealth to GDP,\hypertarget{BRatEStakes}{}
+\begin{verbatimwrite}{./Equations/BRatEStakes}
 \begin{eqnarray}
 \BTargTarg = \frac{\BLevE}{\GDPLev} & = & (1-\kapShare ) \bTargTarg.
 \label{eq:BRatEStakes}
 \end{eqnarray}
 \end{verbatimwrite}
-\input ./equations/BRatEStakes.tex
+\input ./Equations/BRatEStakes.tex
 This expression can be plugged into equation (\ref{eq:NFARat}) to find the ratio of net foreign assets to GDP.
 
 It is interesting to compare formula (\ref{eq:bTargEStakes}) with the
@@ -711,14 +714,16 @@ on numerical simulations.
 
 \section{Calibration and Simulation}
 
+\hypertarget{calibration}{}
 \subsection{Benchmark Calibration and Sensitivity Analysis}
 
 Our benchmark calibration is reported in Table 1. The value for the unemployment probability, $\urate$, implies that a newborn worker expects to be employed for 40 years. The value for the probability of death, $\PDies$, implies that the expected lifetime of a newly unemployed worker is 20 years.
 
 \medskip
 
-\centerline{\bf Table 1}
-
+%\centerline{\bf Table 1}
+\begin{table}
+  \caption{Calibration of Parameters}\label{table:calibration}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
@@ -729,6 +734,7 @@ Our benchmark calibration is reported in Table 1. The value for the unemployment
 \multicolumn{10}{l}{\small Note: For a reminder of parameter definitions, see Appendix \ref{AppDef}} \\
 \end{tabular}
 \end{center}
+\end{table}
 
 The long-run levels of $\bRatE$ and $\cRatE$ are given by
 $\bTarg=4.85$ and $\cTarg=0.95$. The time paths for $\bRatE_{t}$ and $\cRatE_{t}$
@@ -765,9 +771,11 @@ Finally, the foreign asset ratio is increasing with $\Rfree$, mainly because of 
 \caption{Sensitivity To Parameters}\label{fig:sensitivity}
 \end{figure}
 
-
+\hypertarget{Translate-To-Realistic-Model}{}
 \medskip
-\input{insert_saving-and-uncert.tex}
+\subfile{./LaTeX/Insertions/Translate-To-Realistic-Model}
+% \input{insert_saving-and-uncert.tex}
+
 \subsection{Comparison with the Ramsey Model}
 
 The Ramsey model corresponds to the particular case where the economy is populated by one representative infinitely-lived worker ($\EmpGro=1$ and $\urate=0$). Thus, one might expect our model to yield the same results as the Ramsey model in the limiting case as population growth and unemployment risk go to zero ($\PopGro$ and $\urate \rightarrow 0$).
@@ -826,14 +834,14 @@ The wealth of a newly-unemployed worker now includes the payment from the insura
 \cLevU_{t}=\MPCU (\bLev^{u}_t+\Severance \Wage_t \labor_t)=\MPCU (\bRat^{u}_t+\Severance)\Wage_t \labor_t.
 \end{equation*}
 We introduce social insurance in the model with stakes.\footnote{Introducing social insurance in the model without stakes raises no conceptual problems, but does not yield a closed-form solution.} As shown in the appendix, one can compute the target wealth-to-GDP ratio as
-\begin{verbatimwrite}{./equations/bTargWithSocIns}
+\begin{verbatimwrite}{./Equations/bTargWithSocIns}
 \begin{eqnarray}
 \Alt{\bTarg}(\Severance) & = &
 \left\{1-\Severance \left[\frac{\urate}{\EmpGro}+\MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]\right\}\bTargTarg,
 \label{eq:bTargWithSocIns}
 \end{eqnarray}
 \end{verbatimwrite}
-\input ./equations/bTargWithSocIns
+\input ./Equations/bTargWithSocIns
 where $\bTargTarg$ is the asset ratio without insurance, given by (\ref{eq:bTargEStakes}). The target wealth-to-income ratio is (linearly) decreasing with $\Severance$, as insurance provides a substitute to precautionary wealth. The formula for $\NFALev/\GDPLev$ remains (\ref{eq:NFARat}), with the ratio of workers' wealth to GDP given by,
 \begin{equation}
 \frac{\BLevE}{\GDPLev}=(1-\kapShare) \Alt{\bTarg}(\Severance).
@@ -1175,7 +1183,7 @@ outside of the United States.
 Although very stylized, the model is able to predict plausible orders
 of magnitude for the ratio of net foreign assets to GDP. This being
 said, there are several dimensions in which the model could be made
-more realistic, probably at the expense of tractability. In
+more realistic, at the expense of tractability. In
 particular, it would be interesting to know the exchange rate
 implications of a multi-goods extension of the model. (We anticipate
 that such an extension would show that a developing country that
@@ -1396,13 +1404,13 @@ whereas for a new-born worker the transfer is given by,
 \end{equation}
 
 In all periods of a worker's life, thus, the normalized budget constraint is given by,
-\begin{verbatimwrite}{./equations/ibcnormStakes}
+\begin{verbatimwrite}{./Equations/ibcnormStakes}
 \begin{equation}
 \bRatE_{t+1} = (\Rfree /\PGro) \left(\TaxFree \bRatE_{t} -\cRatE_{t}+1\right),
 \label{eq:ibcnormStakes}
 \end{equation}
 \end{verbatimwrite}
-\input ./equations/ibcnormStakes
+\input ./Equations/ibcnormStakes
 which generalizes (\ref{eq:ibcnorm}). Equation (\ref{eq:ssc}) remains valid,
 \begin{equation*}
 \cTargTarg = \MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA} \bTargTarg,
@@ -1430,7 +1438,8 @@ The left-hand side is the flow of payment that is required to endow each newborn
 Using this expression to substitute out $\Tax$ from (\ref{eq:bTargE_tau}) gives (\ref{eq:bTargEStakes}).
 
 \medskip
-\input{insert_saving-and-uncert_2.tex}
+% \input{insert_saving-and-uncert_2.tex}
+\subfile{./LaTeX/Insertions/Translate-To-Realistic-Model-Appendix}
 \subsection{The Ramsey Model}
 
 The Ramsey model corresponds to the particular case where there is one representative infinitely-lived worker ($\EmpGro=1$ and $\urate=0$). In this case income growth is the same at the individual level and at the aggregate level. We can assume, without loss of generality, that $\XperGro=1$, so that $\PGro=\WGro$.
@@ -1531,12 +1540,12 @@ As for $\bRatU_t$, the initial condition can be derived from equation (\ref{eq:B
 \end{equation*}
 The path for $\bRatU_t$ can then be derived from equation
 (\ref{eq:BLevUtp1}), which can be rewritten in normalized form,
-\begin{verbatimwrite}{./equations/bRatUtp1}
+\begin{verbatimwrite}{./Equations/bRatUtp1}
 \begin{equation*}
 \bRatU_{t+1}=\frac{\PLives_a(\Discount \Rfree)^{1/\CRRA}}{\GDPGro_{t+1}} \bRatU_t + \urate_a \bRatE_{t+1}.
 \end{equation*}
 \end{verbatimwrite}
-\input ./equations/bRatUtp1
+\input ./Equations/bRatUtp1
 
 \subsection{Consumption Function}
 
@@ -1575,7 +1584,20 @@ Given the initial function for $m=0$, $_{0}\cFunc^{e}(\bRat)$, the algorithm can
   \item Compute the points $_{m+1}\cRatE[i]$ using \eqref{eq:EulerMod}
   \item Construct an approximate function $_{m+1}\cFunc^{e}(\bRat)$ by fitting the points $(\bRat[i],_{m+1}\cRatE[i])$
   \item If $\max|_{m+1}\cRatE[i]-_{m}\cRatE[i]|<\epsilon$, stop; else increment $m$ and go to step 1
-\end{enumerate}
+  \end{enumerate}
+
+\subsection{$\urate$ as a function of $\BTargTarg$}\label{subsec:urateFromBTargTarg}
+For use below, note that we can invert \eqref{eq} to express the parameters as an implicit function of target of target wealth:
+\begin{eqnarray}
+  \left(\frac{1-\kapShare}{\BTargTarg}\right) & = & \left[\frac{\PGro}{\Rfree}-\frac{1}{2-\LGro}+\MPCU \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]
+  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\} & = & \left[\left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)^{1/\CRRA}\right]
+  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA} & = & \left(1+\frac{\PatPGro^{-\CRRA}-1}{\urate}\right)
+  \\  \left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1& = & \frac{\PatPGro^{-\CRRA}-1}{\urate}
+  \\  \left[\left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1 \right]\urate & = & \PatPGro^{-\CRRA}-1
+  \\  \urate & = & \left[\left\{ \left(\frac{1-\kapShare}{\BTargTarg}\right)-\frac{\PGro}{\Rfree}+\frac{1}{2-\LGro}\right\}^{\CRRA}- 1 \right]^{-1}\left(\PatPGro^{-\CRRA}-1\right)
+\end{eqnarray}
+
+  
 \newpage
 
 \input econtexBibMake.tex
